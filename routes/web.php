@@ -22,7 +22,8 @@ Route::get('/greeting', function () {
 });
 Route::get('/uploadfile', 'UploadfileController@index');
 Route::post('/uploadfile', 'UploadfileController@upload');
-Route::get('/main', [MainController::class, 'index']);
-Route::post('/main/checklogin', [MainController::class, 'checklogin']);
-Route::get('main/successlogin', [MainController::class, 'successlogin']);
-Route::get('main/logout', [MainController::class, 'logout']);
+Route::get('/', [MainController::class, 'index']);
+Route::post('/checklogin', [MainController::class, 'checklogin']);
+Route::get('/successlogin', [MainController::class, 'successlogin']);
+Route::get('/loginGuest', [MainController::class, 'loginGuest']);
+Route::get('/logout', [MainController::class, 'logout']);

@@ -12,7 +12,7 @@
     <h3>Simple Login System in Laravel</h3><br />
 
     @if(isset(Auth::user()->email))
-        <script>window.location="/main/successlogin";</script>
+        <script>window.location="/successlogin";</script>
     @endif
 
     @if ($message = Session::get('error'))
@@ -32,7 +32,7 @@
         </div>
     @endif
 
-    <form method="post" action="{{ url('/main/checklogin') }}">
+    <form method="post" action="{{ url('/checklogin') }}">
         {{ csrf_field() }}
         <div class="form-group">
             <label>Enter Email</label>
@@ -48,6 +48,11 @@
         </div>
         <div class="form-group">
             <input type="submit" name="login" class="btn btn-primary" value="Login" />
+        </div>
+    </form>
+    <form method="get" action="{{url('/loginGuest')}}">
+        <div class="form-group">
+            <input type="submit" name="guest" class="btn btn-primary" value="Continue as Guest" />
         </div>
     </form>
 </div>
