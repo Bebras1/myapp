@@ -42,7 +42,7 @@ class MainController extends Controller
 
     function successlogin()
     {
-        return view('successlogin');
+        return view('loginGuest');
     }
 
     function logout()
