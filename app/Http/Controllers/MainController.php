@@ -50,11 +50,6 @@ class MainController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
-    function loginGuest()
-    {
-        return view('guestHome');
-    }
 }
 
 ?>

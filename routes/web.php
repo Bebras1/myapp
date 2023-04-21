@@ -20,10 +20,18 @@ Route::get('/', function () {
 Route::get('/greeting', function () {
     return 'greeting';
 });
-Route::get('/uploadfile', 'UploadfileController@index');
-Route::post('/uploadfile', 'UploadfileController@upload');
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index']) -> name('home');
 Route::post('/checklogin', [MainController::class, 'checklogin']);
 Route::get('/successlogin', [MainController::class, 'successlogin']);
-Route::get('/loginGuest', [MainController::class, 'loginGuest']);
+Route::get('/loginGuest', [\App\Http\Controllers\ArticleController::class, 'loginGuest']) -> name('loginGuest');
 Route::get('/logout', [MainController::class, 'logout']);
+Route::get('/articles/{article}/edit', [\App\Http\Controllers\ArticleController::class, 'edit'])->name('articles.edit');
+Route::put('/articles/{article}', [\App\Http\Controllers\ArticleController::class, 'update'])->name('articles.update');
+Route::get('/articles/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('articles.create');
+Route::post('/articles', [App\Http\Controllers\ArticleController::class, 'store'])->name('articles.store');
+
+
+
+
+
+

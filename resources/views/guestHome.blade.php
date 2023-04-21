@@ -1,26 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Conference Table</title>
-</head>
-<body>
-<h1>Welcome to the Conference Table</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-    </tr>
-    <tr>
-        <td>John Doe</td>
-        <td>johndoe@example.com</td>
-        <td>555-1234</td>
-    </tr>
-    <tr>
-        <td>Jane Smith</td>
-        <td>janesmith@example.com</td>
-        <td>555-5678</td>
-    </tr>
-</table>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('title', 'Article')
+
+@section('content')
+    <h1>Articles</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($articles as $article)
+            <tr>
+                <td>{{ $article->id }}</td>
+                <td>{{ $article->title }}</td>
+                <td>{{ $article->content }}</td>
+                <td>
+                    <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
