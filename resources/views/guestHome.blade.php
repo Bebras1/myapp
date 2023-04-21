@@ -4,12 +4,15 @@
 
 @section('content')
     <h1>Articles</h1>
+    <br>
+    <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+
     <table class="table">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Action</th>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Content</th>
         </tr>
         </thead>
         <tbody>
@@ -20,7 +23,11 @@
                 <td>{{ $article->content }}</td>
                 <td>
                     <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-primary">Edit</a>
-                    <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+                    <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this article?')">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach

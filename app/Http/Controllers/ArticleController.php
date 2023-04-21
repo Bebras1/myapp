@@ -38,11 +38,11 @@ class ArticleController extends Controller
 
         return redirect('/loginGuest');
     }
-    public function create()
+    function create()
     {
         return view('create');
     }
-    public function store(Request $request)
+    function store(Request $request)
     {
         $request->validate([
             'title' => 'required|max:255',
@@ -58,6 +58,17 @@ class ArticleController extends Controller
 
         // Redirect the user back to the index page with a success message
         return redirect()->route('loginGuest')->with('success', 'Article created successfully.');
+    }
+    function destroy($id)
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->delete();
+            return redirect()->route('loginGuest')->with('success', 'Article deleted successfully.');
+        } else {
+            return redirect()->route('loginGuest')->with('error', 'Article not found.');
+        }
     }
 }
 
