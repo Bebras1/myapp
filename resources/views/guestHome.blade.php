@@ -3,10 +3,11 @@
 @section('title', 'Article')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <h1>Articles</h1>
     <br>
     @auth
-    <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+        <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
     @endauth
 
     <table class="table">
@@ -15,6 +16,9 @@
             <th>ID</th>
             <th>Title</th>
             <th>Content</th>
+            @auth
+                <th>Actions</th>
+            @endauth
         </tr>
         </thead>
         <tbody>
@@ -24,14 +28,14 @@
                 <td>{{ $article->title }}</td>
                 <td>{{ $article->content }}</td>
                 @auth
-                <td>
-                    <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-primary">Edit</a>
-                    <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this article?')">Delete</button>
-                    </form>
-                </td>
+                    <td>
+                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-link"><i class="bi bi-pencil-square"></i></a>
+                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-link" onclick="return confirm('Are you sure you want to delete this article?')"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </td>
                 @endauth
             </tr>
         @endforeach
