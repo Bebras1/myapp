@@ -4,7 +4,7 @@
 
 @section('content')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <h1>Articles</h1>
+    <h1>Conferences</h1>
     <br>
     @auth
         <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
