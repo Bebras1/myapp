@@ -15,10 +15,10 @@
         <div class="alert alert-danger success-block">
             <strong>Welcome {{ Auth::user()->email }}</strong>
             <br />
-            <a href="{{ url('/main/logout') }}">Logout</a>
+            <a href="{{ url('/logout') }}">Logout</a>
         </div>
     @else
-        <script>window.location = "/main";</script>
+        <script>window.location = "/";</script>
     @endif
 
     <br />
