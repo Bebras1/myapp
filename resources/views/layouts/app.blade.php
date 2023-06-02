@@ -17,7 +17,7 @@
             <ul class="navbar-nav">
                 @guest()
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link" href="{{ route('login') }}">Home</a>
                     </li>
                 @endguest
                 @auth()

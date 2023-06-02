@@ -4,52 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
+use App\Models\Article;
 
 class MainController extends Controller
 {
-    function index()
+    public function index()
     {
         return view('login');
     }
-
-    /**
-     * @throws ValidationException
-     */
-    function checklogin(Request $request)
+    public function loginGuest()
     {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password'  => 'required|alphaNum|min:3'
+        $articles = Article::all();
+        return view('guestHome', compact('articles'));
+    }
+    public function guestHome()
+    {
+        $articles = Article::all();
+        return view('guestHome', compact('articles'));
+    }
+    public function checklogin(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        $user_data = array(
-            'email'  => $request->get('email'),
-            'password' => $request->get('password')
-        );
-
-        if(Auth::attempt($user_data))
-        {
-            return redirect('/successlogin');
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('guestHome');
+        } else {
+            return redirect()->back()->with('error', 'Invalid email or password.');
         }
-        else
-        {
-            return back()->with('error', 'Wrong Login Details');
-        }
-
     }
 
-    function successlogin()
-    {
-        return view('loginGuest');
-    }
 
-    function logout()
+    public function logout()
     {
         Auth::logout();
         return redirect('/');
     }
 }
-
-?>

@@ -7,7 +7,9 @@
     <h1>Conferences</h1>
     <br>
     @auth
-        <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+        @can('create', App\Models\Article::class)
+            <a href="{{ route('articles.create') }}" class="btn btn-success">Create</a>
+        @endcan
     @endauth
 
     <table class="table">
@@ -29,12 +31,16 @@
                 <td>{{ $article->content }}</td>
                 @auth
                     <td>
-                        <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-link"><i class="bi bi-pencil-square"></i></a>
-                        <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-link" onclick="return confirm('Are you sure you want to delete this article?')"><i class="bi bi-trash"></i></button>
-                        </form>
+                        @can('update', $article)
+                            <a href="{{ route('articles.edit', $article->id) }}" class="btn btn-link"><i class="bi bi-pencil-square"></i></a>
+                        @endcan
+                        @can('delete', $article)
+                            <form action="{{ route('articles.destroy', $article->id) }}" method="POST" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-link" onclick="return confirm('Are you sure you want to delete this article?')"><i class="bi bi-trash"></i></button>
+                            </form>
+                        @endcan
                     </td>
                 @endauth
             </tr>

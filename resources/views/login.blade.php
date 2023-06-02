@@ -32,10 +32,6 @@
             <div class="card">
                 <div class="card-header"><h3 class="text-center fancy-font">CONFERENCE</h3></div>
 
-                @if(isset(Auth::user()->email))
-                    <script>window.location="/successlogin";</script>
-                @endif
-
                 @if ($message = Session::get('error'))
                     <div class="alert alert-danger alert-block">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -68,11 +64,12 @@
                             <input type="submit" name="login" class="btn btn-login" value="Login" />
                         </div>
                     </form>
-                    <form method="get" action="{{url('/loginGuest')}}" class="mt-3">
+                    <form method="get" action="{{ route('loginGuest') }}" class="mt-3">
                         <div class="d-grid gap-2">
                             <input type="submit" name="guest" class="btn btn-guest" value="Continue as Guest" />
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
